@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   21sh.h                                             :+:      :+:    :+:   */
+/*   ft_21sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vliubko <vliubko@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:40:30 by vliubko           #+#    #+#             */
-/*   Updated: 2018/05/18 12:41:52 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/05/18 17:33:59 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SELECT_H
-# define FT_SELECT_H
+#ifndef FT_21SH_H
+# define FT_21SH_H
 
 # include "../libft/includes/libft.h"
 # include <sys/ioctl.h>
@@ -19,6 +19,27 @@
 # include <term.h>
 # include <signal.h>
 # include <termcap.h>
+
+# define BOLD_WHINE_FONT "\e[1;37m"
+# define BG_COLOR "\e[48;5;29m"
+# define RED_FONT "\033[1;31m"
+# define CYAN_FONT "\e[1;36m"
+# define PURPLE_FONT "\e[1;35m"
+# define YELLOW_FONT "\e[38;5;226m"
+# define COLOR_OFF "\e[0m"
+# define ESC 		32539
+# define ESC_ALTERN	27
+# define BACKSPACE	127
+# define BACKSPACE_1 32639
+# define DEL			2117294875
+# define ENTER		10
+# define ENTER_1	32522
+# define SPACE		32544
+# define SPACE_1		32
+# define UP_ARR		"[A"
+# define DOWN_ARR	"[B"
+# define LEFT_ARR	"[D"
+# define RIGHT_ARR	"[C"
 
 typedef struct		s_args
 {
@@ -41,30 +62,22 @@ typedef struct		s_select
 	int				cols;
 }					t_select;
 
-# define BOLD_WHINE_FONT "\e[1;37m"
-# define BG_COLOR "\e[48;5;29m"
-# define RED_FONT "\033[1;31m"
-# define CYAN_FONT "\e[1;36m"
-# define PURPLE_FONT "\e[1;35m"
-# define YELLOW_FONT "\e[38;5;226m"
-# define COLOR_OFF "\e[0m"
-# define ESC 		32539
-# define ESC_ALTERN	27
-# define BACKSPACE	127
-# define BACKSPACE_1 32639
-# define DEL			2117294875
-# define ENTER		10
-# define ENTER_1		32522
-# define SPACE		32544
-# define SPACE_1		32
-# define UP_ARROW	4283163
-# define DOWN_ARROW	4348699
-# define LEFT_ARROW	4479771
-# define RIGHT_ARROW	4414235
+typedef struct		s_sheel
+{
+	struct termios	tty;
+	struct termios	savetty;
+	struct winsize	win;
+	char 			cmd_line[4096];
+}					t_shell;
 
-void	set_raw_mode(t_select *data);
-void	set_default_mode(t_select *data);
-int		ft_error(char *str);
-int		term_putchar(int c);
+t_shell				g_data;
+
+void				exit_signal(void);
+void				set_raw_mode(void);
+void				set_default_mode(void);
+int					ft_error(char *str);
+int					term_putchar(int c);
+void				signals(void);
+void				term_cmd(char *cmd);
 
 #endif

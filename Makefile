@@ -18,11 +18,12 @@ CFLAGS		+= -I includes -I libft/includes
 LDFLAGS		:= -L libft/ -lft -ltermcap
 
 LIBFT		:= libft/libft.a
-HEADER		 = includes/21sh.h
+HEADER		 = includes/ft_21sh.h
 
 FILES		:= main \
                helpers \
-                terminal_mode
+               terminal_mode \
+               signals
 
 S_DIR 	= src
 O_DIR 	= obj
