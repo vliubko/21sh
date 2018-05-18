@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   21sh.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vliubko <vliubko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vliubko <vliubko@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:40:30 by vliubko           #+#    #+#             */
-/*   Updated: 2018/05/18 12:21:11 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/05/18 12:41:52 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,10 @@ typedef struct		s_select
 # define DOWN_ARROW	4348699
 # define LEFT_ARROW	4479771
 # define RIGHT_ARROW	4414235
+
+void	set_raw_mode(t_select *data);
+void	set_default_mode(t_select *data);
+int		ft_error(char *str);
+int		term_putchar(int c);
 
 #endif

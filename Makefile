@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vliubko <vliubko@student.42.fr>            +#+  +:+       +#+         #
+#    By: vliubko <vliubko@student.unit.ua>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/06 18:46:49 by vliubko           #+#    #+#              #
-#    Updated: 2018/05/18 12:18:44 by vliubko          ###   ########.fr        #
+#    Updated: 2018/05/18 12:39:11 by vliubko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ LDFLAGS		:= -L libft/ -lft -ltermcap
 LIBFT		:= libft/libft.a
 HEADER		 = includes/21sh.h
 
-FILES		:= main
+FILES		:= main \
+               helpers \
+                terminal_mode
 
 S_DIR 	= src
 O_DIR 	= obj
