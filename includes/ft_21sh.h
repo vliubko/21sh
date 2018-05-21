@@ -6,7 +6,7 @@
 /*   By: vliubko <vliubko@student.unit.ua>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:40:30 by vliubko           #+#    #+#             */
-/*   Updated: 2018/05/18 17:33:59 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/05/21 16:46:54 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@
 # define LEFT_ARR	"[D"
 # define RIGHT_ARR	"[C"
 
+# define PROMPT_LEN 3
+# define CMD_LEN	(int)ft_strlen(g_data.cmd_line)
+
 typedef struct		s_args
 {
 	char			*value;
@@ -62,17 +65,21 @@ typedef struct		s_select
 	int				cols;
 }					t_select;
 
-typedef struct		s_sheel
+typedef struct		s_shell
 {
 	struct termios	tty;
 	struct termios	savetty;
 	struct winsize	win;
-	char 			cmd_line[4096];
+	char			cmd_line[4096];
+	int				pos;
+	int				multi_line_count;
+	int 			line_pos;
 }					t_shell;
 
 t_shell				g_data;
 
 void				exit_signal(void);
+void				get_winsize(struct winsize *win);
 void				set_raw_mode(void);
 void				set_default_mode(void);
 int					ft_error(char *str);
