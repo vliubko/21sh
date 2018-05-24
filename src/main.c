@@ -51,14 +51,6 @@ void	move_cursor(char key[])
 		}
 		else if (ft_strequ(&key[1], LEFT_ARR))
 		{
-//			if (g_data.pos < 0)
-//			{
-//				g_data.line_pos--;
-//				g_data.pos = g_data.win.ws_col - 1;
-//			}
-//			else
-//				g_data.pos--;
-//			if ((g_data.line_pos == 0 && g_data.pos > PROMPT_LEN) || g_data.line_pos > 0)
 			term_cmd("le");
 			g_data.pos--;
 		}
@@ -73,6 +65,31 @@ void	move_cursor(char key[])
 		term_cmd("le");
 		g_data.pos--;
 	}
+}
+
+void    insert_char(char *key)
+{
+    char    *tail;
+    char    *tail_new;
+    int     tail_size;
+    int     pos;
+
+    pos = g_data.pos - PROMPT_LEN;
+
+    tail_size = ft_strlen(g_data.cmd_line) - pos;
+    tail = ft_strsub(g_data.cmd_line, pos, tail_size);
+    tail_new = ft_strjoin(key, tail);
+    ft_strdel(&tail);
+
+    ft_strncpy(&g_data.cmd_line[pos], tail_new, ft_strlen(tail_new));
+
+    ft_putstr(tail_new);
+
+    int len = ft_strlen(tail_new);
+    while (--len > 0)
+        term_cmd("le");
+    g_data.pos++;
+    ft_strdel(&tail_new);
 }
 
 int main (int ac, char **av, char **env)
@@ -107,11 +124,16 @@ int main (int ac, char **av, char **env)
 		}
 		if (check_arrows(key))
 			move_cursor(key);
+        else if ((int)key[0] == BACKSPACE || (int)key[0] == BACKSPACE_1)
+        {
+            ft_putstr("hello");
+            int len = 5;
+            while (--len > 0)
+                term_cmd("le");
+        }
 		else if (ft_isprint(key[0]))
 		{
-			ft_putstr(&key[0]);
-			ft_strcat(g_data.cmd_line, key);
-			g_data.pos++;
+            insert_char(key);
 		}
 		if (ft_strequ(g_data.cmd_line, "exit"))
 			exit_signal();
