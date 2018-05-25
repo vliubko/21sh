@@ -105,9 +105,6 @@ void    insert_char(char *key)
     tail = ft_strsub(g_data.cmd_line, pos, cmd_len - pos);
 	head = ft_strsub(g_data.cmd_line, 0, pos);
 	new_tail = ft_strjoin(key, tail);
-    // ft_putstr_fd("tail: ", 2);
-    // ft_putendl_fd(tail, 2);
-
     ft_bzero(g_data.cmd_line, 4096);
     ft_strcat(g_data.cmd_line, head);
     ft_strcat(g_data.cmd_line, new_tail);
@@ -115,7 +112,7 @@ void    insert_char(char *key)
     // ft_putstr_fd("key: ", 2);
     // ft_putendl_fd(&key[0], 2);
 //	sleep(1);
-	//term_cmd("cd");
+	term_cmd("cd");
 //	sleep(1);
     ft_putstr_old(new_tail);
 
@@ -165,18 +162,22 @@ void	shell_loop(void)
 {
 	char 	key[8];
 
+	prompt();
 	while (42)
 	{
-		prompt();
 		ft_bzero(key, 8);
 		signals();
 		read(0, &key, 8);
 		if (key[0] == ENTER)
 		{
+			ft_putstr("\n21sh: command not found: ");
+			ft_putstr(g_data.cmd_line);
+			//ft_putnbr(ft_strlen(g_data.cmd_line));
 			ft_bzero(g_data.cmd_line, 4096);
 			ft_putstr("\n");
+			prompt();
 			g_data.pos = PROMPT_LEN;
-			continue;
+			continue ;
 		}
 		if (check_arrows(key))
 			move_cursor(key);
