@@ -33,7 +33,6 @@
 # define BACKSPACE_1 32639
 # define DEL			2117294875
 # define ENTER		10
-# define ENTER_1	32522
 # define SPACE		32544
 # define SPACE_1		32
 # define UP_ARR		"[A"
@@ -74,6 +73,8 @@ typedef struct		s_shell
 	int				pos;
 	int				multi_line_count;
 	int 			line_pos;
+	int 			save_pos;
+	int 			save_g_pos;
 }					t_shell;
 
 t_shell				g_data;

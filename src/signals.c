@@ -45,7 +45,10 @@ void	sig_callback(int signo)
 {
 	if (signo == SIGINT || signo == SIGABRT || signo == SIGSTOP ||
 		signo == SIGKILL || signo == SIGQUIT || signo == SIGTERM)
+	{
+		ft_putendl("CTRL+C break!");
 		exit_signal();
+	}
 	else if (signo == SIGWINCH)
 		handle_winch();
 	else if (signo == SIGTSTP)
