@@ -53,30 +53,31 @@ void	move_right(void)
 	}
 }
 
+void	move_left(void)
+{
+	if (g_data.pos > PROMPT_LEN && g_data.win.ws_col)
+	{
+		if (g_data.pos % g_data.win.ws_col == 0)
+		{
+			term_cmd("up");
+			tputs(tgoto(tgetstr("RI", 0), 0, g_data.win.ws_col), 1, &term_putchar);
+			g_data.multi_line_count--;
+		}
+		else
+			term_cmd("le");
+		g_data.pos--;
+	}
+}
+
 void	move_cursor(char key[])
 {
-//	if (g_data.multi_line_count)
-//	{
-//		if (ft_strequ(&key[1], RIGHT_ARR) && g_data.pos < count_cmd_length_multiline())
-//		{
-//			term_cmd("nd");
-//			g_data.pos++;
-//		}
-//		else if (ft_strequ(&key[1], LEFT_ARR))
-//		{
-//			term_cmd("le");
-//			g_data.pos--;
-//		}
-//	}
-//	else
-	if (ft_strequ(&key[1], RIGHT_ARR) && g_data.pos < PROMPT_LEN + CMD_LEN)
+	if (ft_strequ(&key[1], RIGHT_ARR))
 	{
 		move_right();
 	}
-	else if (ft_strequ(&key[1], LEFT_ARR) && g_data.pos > PROMPT_LEN)
+	else if (ft_strequ(&key[1], LEFT_ARR))
 	{
-		term_cmd("le");
-		g_data.pos--;
+		move_left();
 	}
 }
 
@@ -100,7 +101,7 @@ void    insert_char(char *key)
 	int 	len;
 	int 	cmd_len;
 
-	cmd_len = ft_strlen(g_data.cmd_line);
+	cmd_len = (int)ft_strlen(g_data.cmd_line);
     pos = g_data.pos - PROMPT_LEN;
     tail = ft_strsub(g_data.cmd_line, pos, cmd_len - pos);
 	head = ft_strsub(g_data.cmd_line, 0, pos);
@@ -108,12 +109,9 @@ void    insert_char(char *key)
     ft_bzero(g_data.cmd_line, 4096);
     ft_strcat(g_data.cmd_line, head);
     ft_strcat(g_data.cmd_line, new_tail);
-    //new_tail = ft_strjoin(&key[0], tail);
-    // ft_putstr_fd("key: ", 2);
-    // ft_putendl_fd(&key[0], 2);
-//	sleep(1);
+
 	term_cmd("cd");
-//	sleep(1);
+	
     ft_putstr_old(new_tail);
 
     len = (int)ft_strlen(tail);

@@ -7,6 +7,6 @@ include_directories(libft/includes includes) # header directories
 link_directories(libft) # library directories
 
 add_executable(21sh
-        src/main.c src/terminal_mode.c src/helpers.c includes/ft_21sh.h src/signals.c libft/src/ft_strjoin.c libft/src/ft_strsub.c)
+        includes/ft_21sh.h src/main.c src/terminal_mode.c src/helpers.c includes/ft_21sh.h src/signals.c libft/src/ft_strjoin.c libft/src/ft_strsub.c)
 
 target_link_libraries(21sh -lft -ltermcap)
