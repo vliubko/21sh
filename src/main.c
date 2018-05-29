@@ -55,7 +55,7 @@ void	move_right(void)
 
 void	move_left(void)
 {
-	if (g_data.pos > PROMPT_LEN && g_data.win.ws_col)
+	if (g_data.pos > PROMPT_LEN)
 	{
 		if (g_data.pos % g_data.win.ws_col == 0)
 		{
@@ -69,27 +69,38 @@ void	move_left(void)
 	}
 }
 
-void	move_prev_word(void)
+void	move_prev_word(void) {
+	int pos;
+
+	pos = g_data.pos - PROMPT_LEN;
+
+	while (WHITESPACE(g_data.cmd_line[pos-1]))
+	{
+		move_left();
+		pos--;
+	}
+	while (!(WHITESPACE(g_data.cmd_line[pos-1])))
+	{
+		move_left();
+		pos--;
+	}
+}
+
+void	move_next_word(void)
 {
-	int 	pos;
+	int pos;
 
 	pos = g_data.pos - PROMPT_LEN;
 
 	while (!(WHITESPACE(g_data.cmd_line[pos])))
 	{
-		move_left();
-		pos--;
-	}
-	if (WHITESPACE(g_data.cmd_line[pos]) && pos > 0)
-	{
-		while (WHITESPACE(g_data.cmd_line[pos]))
-		{
-			move_left();
-			pos--;
-		}
-	}
-	if (pos > 0)
 		move_right();
+		pos++;
+	}
+	while (WHITESPACE(g_data.cmd_line[pos]))
+	{
+		move_right();
+		pos++;
 	}
 }
 
@@ -107,6 +118,10 @@ void	move_cursor(char key[])
 	else if (ft_strequ(&key[1], CTRL_LEFT))
 	{
 		move_prev_word();
+	}
+	else if (ft_strequ(&key[1], CTRL_RIGHT))
+	{
+		move_next_word();
 	}
 }
 
