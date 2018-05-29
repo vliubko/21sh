@@ -39,6 +39,8 @@
 # define DOWN_ARR	"[B"
 # define LEFT_ARR	"[D"
 # define RIGHT_ARR	"[C"
+# define CTRL_RIGHT "[1;5C"
+# define CTRL_LEFT  "[1;5D"
 
 # define PROMPT_LEN 3
 # define CMD_LEN	(int)ft_strlen(g_data.cmd_line)

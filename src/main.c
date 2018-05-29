@@ -21,7 +21,7 @@ int 	check_arrows(char key[])
 {
 	if (key[0] != 27)
 			return (0);
-	if (ft_strequ(&key[1], UP_ARR) || ft_strequ(&key[1], DOWN_ARR) ||
+	if (ft_strequ(&key[1], CTRL_LEFT) || ft_strequ(&key[1], CTRL_RIGHT) ||
 			ft_strequ(&key[1], LEFT_ARR)  || ft_strequ(&key[1], RIGHT_ARR))
 		return (1);
 	return (0);
@@ -69,8 +69,33 @@ void	move_left(void)
 	}
 }
 
+void	move_prev_word(void)
+{
+	int 	pos;
+
+	pos = g_data.pos - PROMPT_LEN;
+
+	while (!(WHITESPACE(g_data.cmd_line[pos])))
+	{
+		move_left();
+		pos--;
+	}
+	if (WHITESPACE(g_data.cmd_line[pos]) && pos > 0)
+	{
+		while (WHITESPACE(g_data.cmd_line[pos]))
+		{
+			move_left();
+			pos--;
+		}
+	}
+	if (pos > 0)
+		move_right();
+	}
+}
+
 void	move_cursor(char key[])
 {
+
 	if (ft_strequ(&key[1], RIGHT_ARR))
 	{
 		move_right();
@@ -78,6 +103,10 @@ void	move_cursor(char key[])
 	else if (ft_strequ(&key[1], LEFT_ARR))
 	{
 		move_left();
+	}
+	else if (ft_strequ(&key[1], CTRL_LEFT))
+	{
+		move_prev_word();
 	}
 }
 
@@ -170,7 +199,6 @@ void	shell_loop(void)
 		{
 			ft_putstr("\n21sh: command not found: ");
 			ft_putstr(g_data.cmd_line);
-			//ft_putnbr(ft_strlen(g_data.cmd_line));
 			ft_bzero(g_data.cmd_line, 4096);
 			ft_putstr("\n");
 			prompt();
@@ -184,12 +212,6 @@ void	shell_loop(void)
 		}
 		if (ft_strequ(g_data.cmd_line, "exit"))
 			exit_signal();
-//		if (g_data.pos == g_data.win.ws_col)
-//		{
-//			g_data.pos = 0;
-//			g_data.multi_line_count++;
-//			g_data.line_pos++;
-//		}
 	}
 }
 
