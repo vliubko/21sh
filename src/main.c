@@ -74,12 +74,12 @@ void	move_prev_word(void) {
 
 	pos = g_data.pos - PROMPT_LEN;
 
-	while (WHITESPACE(g_data.cmd_line[pos-1]))
+	while (WHITESPACE(g_data.cmd_line[pos - 1]))
 	{
 		move_left();
 		pos--;
 	}
-	while (!(WHITESPACE(g_data.cmd_line[pos-1])))
+	while (!(WHITESPACE(g_data.cmd_line[pos - 1])))
 	{
 		move_left();
 		pos--;
@@ -107,22 +107,16 @@ void	move_next_word(void)
 void	move_cursor(char key[])
 {
 
-	if (ft_strequ(&key[1], RIGHT_ARR))
-	{
+	if (ft_strequ(&key[1], RIGHT_ARR)) {
 		move_right();
 	}
-	else if (ft_strequ(&key[1], LEFT_ARR))
-	{
+	else if (ft_strequ(&key[1], LEFT_ARR)) {
 		move_left();
 	}
 	else if (ft_strequ(&key[1], CTRL_LEFT))
-	{
 		move_prev_word();
-	}
 	else if (ft_strequ(&key[1], CTRL_RIGHT))
-	{
 		move_next_word();
-	}
 }
 
 void	ft_putstr_old(char const *s)
