@@ -25,7 +25,7 @@ void	handle_winch(void)
 
 	buf[0] = -55;
 	ioctl(STDERR_FILENO, TIOCSTI, buf);
-	get_winsize(&g_data.win);
+	get_winsize();
 }
 
 void	handle_continue(void)

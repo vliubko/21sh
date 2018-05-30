@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_21sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vliubko <vliubko@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:40:30 by vliubko           #+#    #+#             */
-/*   Updated: 2018/05/21 16:46:54 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/05/30 12:48:35 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <term.h>
 # include <signal.h>
 # include <termcap.h>
+# include "line_editing.h"
 
 # define BOLD_WHINE_FONT "\e[1;37m"
 # define BG_COLOR "\e[48;5;29m"
@@ -37,13 +38,7 @@
 # define SPACE_1		32
 # define UP_ARR		"[A"
 # define DOWN_ARR	"[B"
-# define LEFT_ARR	"[D"
-# define RIGHT_ARR	"[C"
-# define CTRL_RIGHT "[1;5C"
-# define CTRL_LEFT  "[1;5D"
 
-# define PROMPT_LEN 3
-# define CMD_LEN	(int)ft_strlen(g_data.cmd_line)
 
 typedef struct		s_args
 {
@@ -70,7 +65,7 @@ typedef struct		s_shell
 {
 	struct termios	tty;
 	struct termios	savetty;
-	struct winsize	win;
+	int 			ws_col;
 	char			cmd_line[4096];
 	int				pos;
 	int				multi_line_count;
@@ -82,7 +77,7 @@ typedef struct		s_shell
 t_shell				g_data;
 
 void				exit_signal(void);
-void				get_winsize(struct winsize *win);
+void				get_winsize(void);
 void				set_raw_mode(void);
 void				set_default_mode(void);
 int					ft_error(char *str);

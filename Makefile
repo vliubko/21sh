@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vliubko <vliubko@student.unit.ua>          +#+  +:+       +#+         #
+#    By: vliubko <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/06 18:46:49 by vliubko           #+#    #+#              #
-#    Updated: 2018/05/18 12:39:11 by vliubko          ###   ########.fr        #
+#    Updated: 2018/05/30 13:51:17 by vliubko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,10 @@ HEADER		 = includes/ft_21sh.h
 FILES		:= main \
                helpers \
                terminal_mode \
-               signals
+               signals \
+               line_editing/cursor_basic_moves\
+               line_editing/line_edit_helpers\
+               line_editing/insertion_deletion
 
 S_DIR 	= src
 O_DIR 	= obj
@@ -46,6 +49,7 @@ $(NAME): $(OBJ) libft/libft.a
 
 obj:
 	@mkdir -p obj
+	@mkdir -p obj/line_editing
 
 lib:
 	@make -C libft

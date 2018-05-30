@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers.c                                          :+:      :+:    :+:   */
+/*   line_edit_helpers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/15 16:41:36 by vliubko           #+#    #+#             */
-/*   Updated: 2018/05/30 12:44:56 by vliubko          ###   ########.fr       */
+/*   Created: 2018/05/30 13:41:55 by vliubko           #+#    #+#             */
+/*   Updated: 2018/05/30 14:35:21 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-void	get_winsize(void)
+void	clear_cmd_line(void)
 {
-	g_data.ws_col = tgetnum("co");
+	ft_bzero(g_data.cmd_line, 4096);
 }
 
-int		term_putchar(int c)
+void	realloc_cmd_line(char *head, char *new_tail)
 {
-	write(2, &c, 1);
-	return (1);
-}
-
-void	term_cmd(char *cmd)
-{
-	tputs(tgetstr(cmd, NULL), 1, &term_putchar);
-}
-
-int		ft_error(char *str)
-{
-	ft_putstr_fd(RED_FONT, 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd(COLOR_OFF, 2);
-	exit(1);
+	clear_cmd_line();
+	ft_strcat(g_data.cmd_line, head);
+	ft_strcat(g_data.cmd_line, new_tail);
+	ft_strdel(&new_tail);
+	ft_strdel(&head);
 }
