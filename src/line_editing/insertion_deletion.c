@@ -12,14 +12,13 @@
 
 #include "ft_21sh.h"
 
-
-void    insert_char(char *key)
+void	insert_char(char *key)
 {
-	int     pos;
-	char    *tail;
-	char    *new_tail;
-	char    *head;
-	int 	len;
+	int		pos;
+	char	*tail;
+	char	*new_tail;
+	char	*head;
+	int		len;
 
 	pos = g_data.pos - PROMPT_LEN;
 	tail = ft_strsub(g_data.cmd_line, pos, CMD_LEN - pos);
@@ -36,10 +35,10 @@ void    insert_char(char *key)
 
 void	delete_char(void)
 {
-	int     pos;
-	char    *tail;
-	char    *head;
-	int 	len;
+	int		pos;
+	char	*tail;
+	char	*head;
+	int		len;
 
 	pos = g_data.pos - PROMPT_LEN;
 	if (pos == 0)

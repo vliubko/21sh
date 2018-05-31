@@ -6,7 +6,7 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:40:30 by vliubko           #+#    #+#             */
-/*   Updated: 2018/05/30 12:48:35 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/05/31 13:49:37 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ typedef struct		s_shell
 	char			cmd_line[4096];
 	int				pos;
 	int				multi_line_count;
+	t_list			*history;
+	int 			history_len;
 	int 			line_pos;
 	int 			save_pos;
 	int 			save_g_pos;

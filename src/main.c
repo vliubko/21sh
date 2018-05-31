@@ -6,7 +6,7 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 12:39:38 by vliubko           #+#    #+#             */
-/*   Updated: 2018/05/30 14:35:03 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/05/31 17:00:57 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,32 @@ void	shell_init(void)
 	g_data.line_pos = 0;
 	ft_bzero(g_data.cmd_line, 4096);
 	set_raw_mode();
+	g_data.history = ft_lstnew(0, 0);
+	g_data.history_len = 0;
+}
+
+void	history_add(void)
+{
+	g_data.history_len++;
+	ft_lst_pushback(&g_data.history, ft_lstnew(g_data.cmd_line, CMD_LEN));
+}
+
+void	history_print(void)
+{
+	t_list	*tmp;
+	int 	i;
+
+	tmp = g_data.history->next;
+	i = 1;
+	while (tmp)
+	{
+		if (i == 1)
+			ft_putstr("\n");
+		ft_putnbr(i++);
+		ft_putstr("  ");
+		ft_putendl(tmp->content);
+		tmp = tmp->next;
+	}
 }
 
 void	shell_loop(void)
@@ -60,6 +86,7 @@ void	shell_loop(void)
 		read(0, &key, 8);
 		if (key[0] == ENTER)
 		{
+			history_add();
 			ft_putstr("\n21sh: command not found: ");
 			ft_putstr(g_data.cmd_line);
 			clear_cmd_line();
@@ -69,6 +96,8 @@ void	shell_loop(void)
 			continue ;
 		}
 		move_cursor_choose(key);
+		if (ft_strequ(g_data.cmd_line, "history"))
+			history_print();
 		if (ft_strequ(g_data.cmd_line, "exit"))
 			exit_signal();
 	}

@@ -25,6 +25,7 @@ FILES		:= main \
                terminal_mode \
                signals \
                line_editing/cursor_basic_moves\
+               line_editing/cursor_word_home_moves\
                line_editing/line_edit_helpers\
                line_editing/insertion_deletion
 

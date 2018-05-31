@@ -6,46 +6,32 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 12:38:16 by vliubko           #+#    #+#             */
-/*   Updated: 2018/05/30 14:40:31 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/05/30 17:08:02 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-void	move_prev_word(void)
+void	move_up_multiline(void)
 {
-	int pos;
+	int		i;
+	int		line_up;
 
-	pos = g_data.pos - PROMPT_LEN;
-
-	while (WHITESPACE(g_data.cmd_line[pos - 1]))
-	{
+	line_up = g_data.ws_col;
+	i = 0;
+	while (i++ < line_up)
 		move_left();
-		pos--;
-	}
-	while (!(WHITESPACE(g_data.cmd_line[pos - 1])))
-	{
-		move_left();
-		pos--;
-	}
 }
 
-void	move_next_word(void)
+void	move_down_multiline(void)
 {
-	int pos;
+	int		i;
+	int		line_down;
 
-	pos = g_data.pos - PROMPT_LEN;
-
-	while (!(WHITESPACE(g_data.cmd_line[pos])))
-	{
+	i = 0;
+	line_down = g_data.ws_col;
+	while (i++ < line_down)
 		move_right();
-		pos++;
-	}
-	while (WHITESPACE(g_data.cmd_line[pos]))
-	{
-		move_right();
-		pos++;
-	}
 }
 
 int		move_cursor_choose(char key[])
@@ -58,6 +44,14 @@ int		move_cursor_choose(char key[])
 		move_prev_word();
 	else if (ft_strequ(&key[1], CTRL_RIGHT))
 		move_next_word();
+	else if (ft_strequ(&key[1], HOME))
+		move_cursor_home();
+	else if (ft_strequ(&key[1], END))
+		move_cursor_end();
+	else if (ft_strequ(&key[1], CTRL_UP))
+		move_up_multiline();
+	else if (ft_strequ(&key[1], CTRL_DOWN))
+		move_down_multiline();
 	else if (key[0] == BACKSPACE)
 		delete_char();
 	else if (ft_isprint(key[0]))
