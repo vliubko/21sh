@@ -6,7 +6,7 @@
 #    By: vliubko <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/06 18:46:49 by vliubko           #+#    #+#              #
-#    Updated: 2018/05/30 13:51:17 by vliubko          ###   ########.fr        #
+#    Updated: 2018/06/04 15:02:58 by vliubko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,11 @@ FILES		:= main \
                line_editing/cursor_basic_moves\
                line_editing/cursor_word_home_moves\
                line_editing/line_edit_helpers\
-               line_editing/insertion_deletion
+               line_editing/insertion_deletion\
+               execution/check_bi\
+               env/env_commands\
+               builtins/bi_cd\
+               builtins/bi_env
 
 S_DIR 	= src
 O_DIR 	= obj
@@ -50,7 +54,10 @@ $(NAME): $(OBJ) libft/libft.a
 
 obj:
 	@mkdir -p obj
-	@mkdir -p obj/line_editing
+	@mkdir obj/line_editing
+	@mkdir obj/execution
+	@mkdir obj/env
+	@mkdir obj/builtins
 
 lib:
 	@make -C libft

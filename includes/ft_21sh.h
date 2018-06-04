@@ -6,7 +6,7 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:40:30 by vliubko           #+#    #+#             */
-/*   Updated: 2018/05/31 13:49:37 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/06/04 14:40:45 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@
 # include <term.h>
 # include <signal.h>
 # include <termcap.h>
+# include <sys/stat.h>
+# include <sys/param.h>
 # include "line_editing.h"
+# include "env.h"
+# include "builtins.h"
+# include "execution.h"
 
 # define BOLD_WHINE_FONT "\e[1;37m"
 # define BG_COLOR "\e[48;5;29m"
@@ -61,6 +66,13 @@ typedef struct		s_select
 	int				cols;
 }					t_select;
 
+typedef	struct		s_history
+{
+	char			*cmd;
+	struct	s_hist	*next;
+	struct	s_hist	*prev;
+}					t_history;
+
 typedef struct		s_shell
 {
 	struct termios	tty;
@@ -69,11 +81,8 @@ typedef struct		s_shell
 	char			cmd_line[4096];
 	int				pos;
 	int				multi_line_count;
-	t_list			*history;
+	t_history		*history;
 	int 			history_len;
-	int 			line_pos;
-	int 			save_pos;
-	int 			save_g_pos;
 }					t_shell;
 
 t_shell				g_data;
