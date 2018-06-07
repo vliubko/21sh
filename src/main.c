@@ -6,7 +6,7 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 12:39:38 by vliubko           #+#    #+#             */
-/*   Updated: 2018/06/04 15:04:53 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/06/07 20:07:12 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,6 @@ void	prompt(void)
 {
 	ft_putstr("$> ");
 }
-
-//int 	count_cmd_length_multiline(void)
-//{
-//	int 	line_length;
-//	int 	total_length;
-//
-//	total_length = CMD_LEN + PROMPT_LEN;
-//	line_length = total_length - ((g_data.multi_line_count) * g_data.win.ws_col);
-//	return (line_length);
-//}
-
-//void	ft_putstr_old(char const *s)
-//{
-//    if (!s)
-//        return ;
-//	while (*s != '\0')
-//	{
-//		ft_putchar(*s);
-//		s = s + 1;
-//	}
-//}
 
 void	shell_init(void)
 {
@@ -48,35 +27,69 @@ void	shell_init(void)
 	//g_data.history_len = 0;
 }
 
-//void	history_add(void)
-//{
-//	g_data.history_len++;
-//	ft_lst_pushback(&g_data.history, ft_lstnew(g_data.cmd_line, CMD_LEN));
-//}
-//
-//void	history_print(void)
-//{
-//	t_list	*tmp;
-//	int 	i;
-//
-//	tmp = g_data.history->next;
-//	i = 1;
-//	while (tmp)
-//	{
-//		if (i == 1)
-//			ft_putstr("\n");
-//		ft_putnbr(i++);
-//		ft_putstr("  ");
-//		ft_putendl(tmp->content);
-//		tmp = tmp->next;
-//	}
-//}
+char    ***ft_convert_2dtab_to_3dtab(char **old)
+{
+        int     len;
+        char    ***ret;
+
+        len = 0;
+        while (old[len])
+            len++;
+        ret = (char***)malloc(sizeof(ret) * (len + 1));
+        ret[len] = NULL;
+
+        int i = 0;
+        while (i < len)
+        {
+            ret[i] = ft_strsplit_whitespaces(old[i]);
+            i++;
+        }
+        return (ret);
+}
+
+int		multi_commands(char **commands)
+{
+    int		i;
+    char	**d2_tab;
+    char    ***d3_tab;
+    int		ret;
+
+    i = -1;
+    while (commands[++i])
+    {
+        //tild_replace_home() TILD REPLACE HERE
+        d2_tab = ft_strsplit(commands[i], '|');
+        d3_tab = ft_convert_2dtab_to_3dtab(d2_tab);
+        ft_free_2d_array(d2_tab);
+        ret = exe_command(d3_tab);
+
+        if (ret == -1)
+            return (-1);
+    }
+    return (0);
+}
+
+void    start_exec(void)
+{
+    char	**commands;
+    int     ret;
+
+    //ADD HISTORY HERE
+    ft_putstr("\n");
+    commands = ft_strsplit(g_data.cmd_line, ';');
+    ret = multi_commands(commands);
+    ft_free_2d_array(commands);
+    clear_cmd_line();
+    if (ret == -1)
+        exit_signal();
+    ft_putstr("\n");
+    prompt();
+    g_data.pos = PROMPT_LEN;
+}
 
 void	shell_loop(void)
 {
 	char 	key[8];
-    char	**commands;
-    int     ret;
 
     prompt();
 	while (42)
@@ -87,22 +100,10 @@ void	shell_loop(void)
 		read(0, &key, 8);
 		if (key[0] == ENTER)
 		{
-			//history_add();
-			ft_putstr("\n");
-			//ft_putstr(g_data.cmd_line);
-            commands = ft_strsplit_whitespaces(g_data.cmd_line);
-			ret = exe_command(commands);
-            if (ret == -1)
-                exit_signal();
-            clear_cmd_line();
-			ft_putstr("\n");
-			prompt();
-			g_data.pos = PROMPT_LEN;
+			start_exec();
 			continue ;
 		}
 		move_cursor_choose(key);
-		if (ft_strequ(g_data.cmd_line, "exit"))
-			exit_signal();
 	}
 }
 

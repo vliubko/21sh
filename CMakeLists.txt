@@ -24,6 +24,9 @@ add_executable(21sh
         src/builtins/bi_cd.c
         src/env/env_commands.c
         includes/builtins.h
-        includes/execution.h src/builtins/bi_env.c)
+        includes/execution.h src/builtins/bi_echo.c src/builtins/bi_clear.c src/builtins/bi_set_unset_env.c
+        src/execution/pipes.c
+        libft/src/ft_strchr.c
+        libft/src/ft_strsplit_whitespaces.c libft/src/ft_convert_2dtab_to_3dtab.c)
 
 target_link_libraries(21sh -lft -ltermcap)

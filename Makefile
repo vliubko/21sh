@@ -6,7 +6,7 @@
 #    By: vliubko <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/06 18:46:49 by vliubko           #+#    #+#              #
-#    Updated: 2018/06/04 15:02:58 by vliubko          ###   ########.fr        #
+#    Updated: 2018/06/06 11:33:51 by vliubko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,12 @@ FILES		:= main \
                line_editing/line_edit_helpers\
                line_editing/insertion_deletion\
                execution/check_bi\
+               execution/pipes\
                env/env_commands\
                builtins/bi_cd\
-               builtins/bi_env
+               builtins/bi_set_unset_env\
+               builtins/bi_echo\
+               builtins/bi_clear
 
 S_DIR 	= src
 O_DIR 	= obj

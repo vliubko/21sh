@@ -32,6 +32,7 @@
 # define CYAN_FONT "\e[1;36m"
 # define PURPLE_FONT "\e[1;35m"
 # define YELLOW_FONT "\e[38;5;226m"
+# define INVERTED 	"\e[7m"
 # define COLOR_OFF "\e[0m"
 # define ESC 		32539
 # define ESC_ALTERN	27

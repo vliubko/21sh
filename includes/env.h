@@ -25,6 +25,8 @@ t_env				*g_env;
 char				**list_to_array(void);
 char	            *get_env_value_by_name(char *key);
 void	            change_env_value_by_name(char *key, char *value);
+void	            add_env_value(char *key, char *value);
+void	            remove_env_value_by_name(char *key);
 void	            env_init(int ac, char **av, char **envp);
 
 #endif

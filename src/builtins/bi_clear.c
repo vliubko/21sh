@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bi_env.c                                           :+:      :+:    :+:   */
+/*   bi_clear.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/04 16:06:00 by vliubko           #+#    #+#             */
-/*   Updated: 2018/06/04 16:06:00 by vliubko          ###   ########.fr       */
+/*   Created: 2018/06/06 11:30:43 by vliubko           #+#    #+#             */
+/*   Updated: 2018/06/06 11:30:43 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-int		bi_env(void)
+int		bi_clear(void)
 {
-    t_env	*print;
-
-    print = g_env;
-    while (print)
-    {
-        ft_putstr(print->key);
-        ft_putstr("=");
-        ft_putendl(print->value);
-        print = print->next;
-    }
+    ft_putstr("\033[2J\033[1;1H");
     return (1);
 }
