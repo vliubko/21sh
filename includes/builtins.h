@@ -11,15 +11,14 @@
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
-#define BUILTINS_H
+# define BUILTINS_H
 
 int				bi_cd(char **arg);
 int				cd_standart(char *path);
-char			*tild_replace_home(char *line);
-int		        bi_env(void);
+int				bi_env(void);
 int				bi_echo(char **av);
-int             bi_clear(void);
-int		        bi_setenv(char **command);
-int		        bi_unsetenv(char **command);
+int				bi_clear(void);
+int				bi_setenv(char **command);
+int				bi_unsetenv(char **command);
 
 #endif

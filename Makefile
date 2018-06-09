@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vliubko <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: vliubko <vliubko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/06 18:46:49 by vliubko           #+#    #+#              #
-#    Updated: 2018/06/06 11:33:51 by vliubko          ###   ########.fr        #
+#    Updated: 2018/06/08 19:01:44 by vliubko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,18 @@ FILES		:= main \
                helpers \
                terminal_mode \
                signals \
+               signals2 \
+               init \
                line_editing/cursor_basic_moves\
                line_editing/cursor_word_home_moves\
                line_editing/line_edit_helpers\
                line_editing/insertion_deletion\
                execution/check_bi\
                execution/pipes\
+               execution/execute\
+               execution/dollar_replace\
                env/env_commands\
+               env/env_init\
                builtins/bi_cd\
                builtins/bi_set_unset_env\
                builtins/bi_echo\

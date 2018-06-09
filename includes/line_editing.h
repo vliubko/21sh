@@ -15,12 +15,12 @@
 
 # define LEFT_ARR	"[D"
 # define RIGHT_ARR	"[C"
-# define CTRL_RIGHT "[1;5C"
-# define CTRL_LEFT  "[1;5D"
-# define CTRL_UP    "[1;5A"
-# define CTRL_DOWN  "[1;5B"
-# define END    	"[F"
-# define HOME   	"[H"
+# define CTRL_RIGHT	"[1;5C"
+# define CTRL_LEFT	"[1;5D"
+# define CTRL_UP	"[1;5A"
+# define CTRL_DOWN	"[1;5B"
+# define END		"[F"
+# define HOME		"[H"
 
 # define PROMPT_LEN 3
 # define CMD_LEN	(int)ft_strlen(g_data.cmd_line)
@@ -32,10 +32,9 @@ void				move_prev_word(void);
 void				move_next_word(void);
 void				move_cursor_home(void);
 void				move_cursor_end(void);
-void    			insert_char(char *key);
+void				insert_char(char *key);
 void				delete_char(void);
 void				clear_cmd_line(void);
 void				realloc_cmd_line(char *head, char *new_tail);
-
 
 #endif

@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bi_clear.c                                         :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/06 11:30:43 by vliubko           #+#    #+#             */
-/*   Updated: 2018/06/06 11:30:43 by vliubko          ###   ########.fr       */
+/*   Created: 2018/06/08 13:00:38 by vliubko           #+#    #+#             */
+/*   Updated: 2018/06/08 17:25:10 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-int		bi_clear(void)
+void	shell_init(void)
 {
-	ft_putstr("\033[2J\033[1;1H");
-	return (1);
+	g_data.pos = PROMPT_LEN;
+	g_data.multi_line_count = 0;
+	ft_bzero(g_data.cmd_line, 4096);
+	set_raw_mode();
 }

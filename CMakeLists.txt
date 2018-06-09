@@ -27,6 +27,13 @@ add_executable(21sh
         includes/execution.h src/builtins/bi_echo.c src/builtins/bi_clear.c src/builtins/bi_set_unset_env.c
         src/execution/pipes.c
         libft/src/ft_strchr.c
-        libft/src/ft_strsplit_whitespaces.c libft/src/ft_convert_2dtab_to_3dtab.c)
+        libft/src/ft_strsplit_whitespaces.c
+        libft/src/ft_convert_2dtab_to_3dtab.c
+        src/execution/execute.c
+        src/env/env_init.c
+        src/init.c
+        src/signals2.c
+        includes/signals_header.h
+        src/execution/dollar_replace.c)
 
 target_link_libraries(21sh -lft -ltermcap)

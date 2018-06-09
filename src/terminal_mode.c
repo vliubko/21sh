@@ -12,6 +12,17 @@
 
 #include "ft_21sh.h"
 
+int		term_putchar(int c)
+{
+	write(2, &c, 1);
+	return (1);
+}
+
+void	term_cmd(char *cmd)
+{
+	tputs(tgetstr(cmd, NULL), 1, &term_putchar);
+}
+
 void	set_raw_mode(void)
 {
 	if (!isatty(0))

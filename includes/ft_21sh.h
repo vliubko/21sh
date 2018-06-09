@@ -25,6 +25,7 @@
 # include "env.h"
 # include "builtins.h"
 # include "execution.h"
+# include "signals_header.h"
 
 # define BOLD_WHINE_FONT "\e[1;37m"
 # define BG_COLOR "\e[48;5;29m"
@@ -44,7 +45,6 @@
 # define SPACE_1		32
 # define UP_ARR		"[A"
 # define DOWN_ARR	"[B"
-
 
 typedef struct		s_args
 {
@@ -70,24 +70,27 @@ typedef struct		s_select
 typedef	struct		s_history
 {
 	char			*cmd;
-	struct	s_hist	*next;
-	struct	s_hist	*prev;
+	struct s_hist	*next;
+	struct s_hist	*prev;
 }					t_history;
 
 typedef struct		s_shell
 {
 	struct termios	tty;
 	struct termios	savetty;
-	int 			ws_col;
+	int				ws_col;
 	char			cmd_line[4096];
 	int				pos;
 	int				multi_line_count;
 	t_history		*history;
-	int 			history_len;
+	int				history_len;
 }					t_shell;
 
 t_shell				g_data;
 
+void				sig_callback(int signo);
+void				shell_init(void);
+void				shell_loop(void);
 void				exit_signal(void);
 void				get_winsize(void);
 void				set_raw_mode(void);
@@ -96,5 +99,6 @@ int					ft_error(char *str);
 int					term_putchar(int c);
 void				signals(void);
 void				term_cmd(char *cmd);
+void				prompt(void);
 
 #endif

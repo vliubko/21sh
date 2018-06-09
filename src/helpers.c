@@ -12,20 +12,20 @@
 
 #include "ft_21sh.h"
 
+void	prompt(void)
+{
+	ft_putstr("$> ");
+}
+
+void	exit_signal(void)
+{
+	set_default_mode();
+	exit(0);
+}
+
 void	get_winsize(void)
 {
 	g_data.ws_col = tgetnum("co");
-}
-
-int		term_putchar(int c)
-{
-	write(2, &c, 1);
-	return (1);
-}
-
-void	term_cmd(char *cmd)
-{
-	tputs(tgetstr(cmd, NULL), 1, &term_putchar);
 }
 
 int		ft_error(char *str)
