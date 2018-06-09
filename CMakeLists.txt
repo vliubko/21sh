@@ -34,6 +34,6 @@ add_executable(21sh
         src/init.c
         src/signals2.c
         includes/signals_header.h
-        src/execution/dollar_replace.c)
+        src/execution/dollar_replace.c src/line_editing/history.c)
 
 target_link_libraries(21sh -lft -ltermcap)

@@ -67,13 +67,6 @@ typedef struct		s_select
 	int				cols;
 }					t_select;
 
-typedef	struct		s_history
-{
-	char			*cmd;
-	struct s_hist	*next;
-	struct s_hist	*prev;
-}					t_history;
-
 typedef struct		s_shell
 {
 	struct termios	tty;

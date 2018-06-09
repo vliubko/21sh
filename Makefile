@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vliubko <vliubko@student.42.fr>            +#+  +:+       +#+         #
+#    By: vliubko <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/06 18:46:49 by vliubko           #+#    #+#              #
-#    Updated: 2018/06/08 19:01:44 by vliubko          ###   ########.fr        #
+#    Updated: 2018/06/09 18:14:10 by vliubko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ FILES		:= main \
                line_editing/cursor_word_home_moves\
                line_editing/line_edit_helpers\
                line_editing/insertion_deletion\
+               line_editing/history\
                execution/check_bi\
                execution/pipes\
                execution/execute\
@@ -56,7 +57,7 @@ $(O_DIR)/%.o: src/%.c $(HEADER)
 	$(CC) -c $(CFLAGS) $< -o $@
 
 $(NAME): $(OBJ) libft/libft.a
-	@$(CC) $(LDFLAGS) -o $@ $^
+	@$(CC) $(LDFLAGS) -o $@ $^  #-fsanitize=address
 	@echo ""
 	@echo "\033[32mBinary \033[1;32m$(NAME)\033[1;0m\033[32m created.\033[0m"
 

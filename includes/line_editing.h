@@ -6,7 +6,7 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 12:49:04 by vliubko           #+#    #+#             */
-/*   Updated: 2018/05/30 16:52:17 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/06/09 18:11:57 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@
 # define PROMPT_LEN 3
 # define CMD_LEN	(int)ft_strlen(g_data.cmd_line)
 
+typedef	struct			s_history
+{
+	char				*cmd;
+	struct s_history	*next;
+	struct s_history	*prev;
+}						t_history;
+
 int					move_cursor_choose(char key[]);
 void				move_right(void);
 void				move_left(void);
@@ -36,5 +43,8 @@ void				insert_char(char *key);
 void				delete_char(void);
 void				clear_cmd_line(void);
 void				realloc_cmd_line(char *head, char *new_tail);
+void				history_init(void);
+void				add_to_history(void);
+void				display_history(void);
 
 #endif

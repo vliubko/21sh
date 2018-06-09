@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vliubko <vliubko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 12:39:38 by vliubko           #+#    #+#             */
-/*   Updated: 2018/06/08 18:59:40 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/06/09 19:08:05 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	start_exec(void)
 	int		ret;
 
 	ft_putstr("\n");
+	add_to_history();
+	//display_history();
 	commands = ft_strsplit(g_data.cmd_line, ';');
 	ret = multi_commands(commands);
 	ft_free_2d_array(commands);
@@ -80,6 +82,8 @@ void	shell_loop(void)
 			continue ;
 		}
 		move_cursor_choose(key);
+		if (ft_strequ(g_data.cmd_line, "history"))
+			display_history();
 	}
 }
 
