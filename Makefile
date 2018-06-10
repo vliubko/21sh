@@ -6,7 +6,7 @@
 #    By: vliubko <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/06 18:46:49 by vliubko           #+#    #+#              #
-#    Updated: 2018/06/09 18:14:10 by vliubko          ###   ########.fr        #
+#    Updated: 2018/06/10 12:06:55 by vliubko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ FILES		:= main \
                line_editing/cursor_word_home_moves\
                line_editing/line_edit_helpers\
                line_editing/insertion_deletion\
-               line_editing/history\
+               line_editing/history_init_display\
+               line_editing/history_scroll\
                execution/check_bi\
                execution/pipes\
                execution/execute\

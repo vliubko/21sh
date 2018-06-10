@@ -6,7 +6,7 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:40:30 by vliubko           #+#    #+#             */
-/*   Updated: 2018/06/04 14:40:45 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/06/10 10:08:31 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@
 # define ENTER		10
 # define SPACE		32544
 # define SPACE_1		32
-# define UP_ARR		"[A"
-# define DOWN_ARR	"[B"
 
 typedef struct		s_args
 {

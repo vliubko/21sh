@@ -6,7 +6,7 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 12:38:16 by vliubko           #+#    #+#             */
-/*   Updated: 2018/05/30 17:08:02 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/06/10 15:46:28 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int		move_cursor_choose(char key[])
 		move_up_multiline();
 	else if (ft_strequ(&key[1], CTRL_DOWN))
 		move_down_multiline();
+	else if (ft_strequ(&key[1], UP_ARR) || ft_strequ(&key[1], DOWN_ARR))
+		history_processing(key);
 	else if (key[0] == BACKSPACE)
 		delete_char();
 	else if (ft_isprint(key[0]))

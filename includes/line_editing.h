@@ -6,7 +6,7 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 12:49:04 by vliubko           #+#    #+#             */
-/*   Updated: 2018/06/10 10:23:29 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/06/10 13:39:16 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # define LEFT_ARR	"[D"
 # define RIGHT_ARR	"[C"
+# define UP_ARR		"[A"
+# define DOWN_ARR	"[B"
 # define CTRL_RIGHT	"[1;5C"
 # define CTRL_LEFT	"[1;5D"
 # define CTRL_UP	"[1;5A"
@@ -28,6 +30,7 @@
 typedef	struct			s_history
 {
 	char				**line;
+	char 				*buf;
 	int					len;
 	int 				index;
 }						t_history;
@@ -46,5 +49,8 @@ void				realloc_cmd_line(char *head, char *new_tail);
 void				history_init(void);
 void				add_to_history(void);
 int					display_history(void);
+void				history_back(void);
+void				history_forward(void);
+void				history_processing(char *key);
 
 #endif

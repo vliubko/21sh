@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history.c                                          :+:      :+:    :+:   */
+/*   history_init_display.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 11:49:45 by vliubko           #+#    #+#             */
-/*   Updated: 2018/06/10 11:48:14 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/06/10 15:20:28 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 void	add_to_history(void)
 {
 	char	**new;
-	int 	i;
+	int		i;
 
 	i = 0;
+	if (g_data.cmd_line[0] == '\0')
+		return ;
 	new = (char**)malloc(sizeof(char*) * (g_data.history.len + 2));
 	while (i < g_data.history.len)
 	{
@@ -29,17 +31,19 @@ void	add_to_history(void)
 	ft_free_2d_array(g_data.history.line);
 	g_data.history.line = new;
 	g_data.history.len++;
+	g_data.history.index = g_data.history.len;
 }
 
 void	history_init(void)
 {
 	g_data.history.index = 0;
 	g_data.history.len = 0;
+	g_data.history.buf = "BUFFER!!!";
 }
 
 int		display_history(void)
 {
-	int 	i;
+	int		i;
 
 	i = 0;
 	while (i < g_data.history.len)
