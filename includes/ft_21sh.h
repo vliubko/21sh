@@ -75,8 +75,7 @@ typedef struct		s_shell
 	char			cmd_line[4096];
 	int				pos;
 	int				multi_line_count;
-	t_history		*history;
-	int				history_len;
+	t_history		history;
 }					t_shell;
 
 t_shell				g_data;

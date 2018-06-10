@@ -6,7 +6,7 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/09 11:49:45 by vliubko           #+#    #+#             */
-/*   Updated: 2018/06/09 19:15:49 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/06/10 11:48:14 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,43 @@
 
 void	add_to_history(void)
 {
-	g_data.history->cmd = ft_strdup(g_data.cmd_line);
-	g_data.history->next = (t_history*)malloc(sizeof(g_data.history));
-	g_data.history->next->cmd = NULL;
-	g_data.history->next->prev = g_data.history;
-	g_data.history = g_data.history->next;
-	g_data.history_len++;
+	char	**new;
+	int 	i;
+
+	i = 0;
+	new = (char**)malloc(sizeof(char*) * (g_data.history.len + 2));
+	while (i < g_data.history.len)
+	{
+		new[i] = ft_strdup(g_data.history.line[i]);
+		i++;
+	}
+	new[i] = ft_strdup(g_data.cmd_line);
+	new[i + 1] = NULL;
+	ft_free_2d_array(g_data.history.line);
+	g_data.history.line = new;
+	g_data.history.len++;
 }
 
 void	history_init(void)
 {
-	g_data.history = (t_history*)malloc(sizeof(g_data.history));
-	g_data.history->next = NULL;
-	g_data.history->prev = NULL;
-	g_data.history->cmd = NULL;
-	g_data.history_len = 0;
+	g_data.history.index = 0;
+	g_data.history.len = 0;
 }
 
-void	display_history(void)
+int		display_history(void)
 {
-	int 		index;
+	int 	i;
 
-	index = 0;
-	while (index < g_data.history_len)
-		g_data.history = g_data.history->prev;
-	index = 0;
-	while (index < g_data.history_len)
+	i = 0;
+	while (i < g_data.history.len)
 	{
-		ft_putnbr(index);
-		ft_putstr(" ");
-		ft_putendl(g_data.history->cmd);
-		g_data.history = g_data.history->next;
-		index++;
+		ft_putnbr(i + 1);
+		if (i < 9)
+			ft_putstr("   ");
+		else
+			ft_putstr("  ");
+		ft_putendl(g_data.history.line[i]);
+		i++;
 	}
+	return (1);
 }

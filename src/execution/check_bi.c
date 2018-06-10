@@ -46,6 +46,8 @@ int		check_builtins(char ***command)
 		return (bi_setenv((*command) + 1));
 	if (ft_strequ((*command)[0], "unsetenv"))
 		return (bi_unsetenv((*command) + 1));
+	if (ft_strequ((*command)[0], "history"))
+		return (display_history());
 	return (0);
 }
 

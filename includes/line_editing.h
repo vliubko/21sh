@@ -6,7 +6,7 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 12:49:04 by vliubko           #+#    #+#             */
-/*   Updated: 2018/06/09 18:11:57 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/06/10 10:23:29 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 
 typedef	struct			s_history
 {
-	char				*cmd;
-	struct s_history	*next;
-	struct s_history	*prev;
+	char				**line;
+	int					len;
+	int 				index;
 }						t_history;
 
 int					move_cursor_choose(char key[]);
@@ -45,6 +45,6 @@ void				clear_cmd_line(void);
 void				realloc_cmd_line(char *head, char *new_tail);
 void				history_init(void);
 void				add_to_history(void);
-void				display_history(void);
+int					display_history(void);
 
 #endif
