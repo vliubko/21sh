@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vliubko <vliubko@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/06 12:06:16 by vliubko           #+#    #+#             */
-/*   Updated: 2018/06/08 19:29:23 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/06/11 20:57:27 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ int		pipe_fork_run(char ***cmd)
 			child_pipe_run(fd_in, pipefd, cmd);
 		else
 		{
-			waitpid(childpid, NULL, 0);
 			close(pipefd[WRITE_END]);
 			fd_in = pipefd[READ_END];
 			cmd++;
 		}
 	}
+	waitpid(childpid, 0, 0);
+	kill(0, 0);
 	return (execve_cmd(cmd));
 }
