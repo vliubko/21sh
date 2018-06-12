@@ -17,6 +17,8 @@
 # define RIGHT_ARR	"[C"
 # define UP_ARR		"[A"
 # define DOWN_ARR	"[B"
+# define ALT_V (key[0] == -30 && key[1] == -120 && key[2] == -102)
+# define ALT_C (key[0] == -61 && key[1] == -89)
 # define CTRL_RIGHT	"[1;5C"
 # define CTRL_LEFT	"[1;5D"
 # define CTRL_UP	"[1;5A"
@@ -52,5 +54,5 @@ int					display_history(void);
 void				history_back(void);
 void				history_forward(void);
 void				history_processing(char *key);
-
+void    			copy_paste_processing(char  *key);
 #endif

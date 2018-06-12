@@ -32,6 +32,7 @@ FILES		:= main \
                line_editing/insertion_deletion\
                line_editing/history_init_display\
                line_editing/history_scroll\
+               line_editing/copy_paste\
                execution/check_bi\
                execution/pipes\
                execution/execute\

@@ -71,6 +71,7 @@ typedef struct		s_shell
 	struct termios	savetty;
 	int				ws_col;
 	char			cmd_line[4096];
+	char			buf_cmd_line[4096];
 	int				pos;
 	int				multi_line_count;
 	t_history		history;

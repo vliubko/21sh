@@ -56,6 +56,8 @@ int		move_cursor_choose(char key[])
 		history_processing(key);
 	else if (key[0] == BACKSPACE)
 		delete_char();
+	else if (ALT_V || ALT_C)
+		copy_paste_processing(key);
 	else if (ft_isprint(key[0]))
 		insert_char(key);
 	else
