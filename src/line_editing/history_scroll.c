@@ -31,8 +31,8 @@ void	history_back(void)
 {
 	char 	*old;
 
-//	if (!g_data.history.buf)
-//		g_data.history.buf = ft_strdup(g_data.cmd_line);
+	if (!g_data.history.buf)
+		g_data.history.buf = ft_strdup(g_data.cmd_line);
 
 	if (g_data.history.index > 0)
 		g_data.history.index--;
@@ -51,11 +51,10 @@ void	history_forward(void)
 		g_data.history.index--;
 		return ;
 	}
-
 	if (g_data.history.index == g_data.history.len)
 	{
 		insert_history(g_data.history.buf);
-		//ft_strdel(&g_data.history.buf);
+		ft_strdel(&g_data.history.buf);
 		return ;
 	}
 	old = g_data.history.line[g_data.history.index];

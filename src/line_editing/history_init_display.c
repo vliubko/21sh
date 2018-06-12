@@ -38,7 +38,7 @@ void	history_init(void)
 {
 	g_data.history.index = 0;
 	g_data.history.len = 0;
-	g_data.history.buf = "BUFFER!!!";
+	g_data.history.buf = NULL;
 }
 
 int		display_history(void)
