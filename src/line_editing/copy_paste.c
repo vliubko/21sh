@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   copy_paste.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/16 10:53:50 by vliubko           #+#    #+#             */
+/*   Updated: 2018/06/16 10:54:17 by vliubko          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_21sh.h"
 
 void    copy_line(void)
@@ -18,13 +30,13 @@ void    paste_line(void)
     char    *tail;
     char    *new_tail;
     char    *head;
-    int     len;
+    //int     len;
 
     pos = g_data.pos - PROMPT_LEN;
 	tail = ft_strsub(g_data.cmd_line, pos, CMD_LEN - pos);
 	head = ft_strsub(g_data.cmd_line, 0, pos);
 	new_tail = ft_strjoin(g_data.buf_cmd_line, tail);
-	len = (int)ft_strlen(tail);
+	//len = (int)ft_strlen(tail);
 	ft_strdel(&tail);
 	term_cmd("cd");
 	ft_putstr(new_tail);

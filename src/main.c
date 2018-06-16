@@ -6,7 +6,7 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 12:39:38 by vliubko           #+#    #+#             */
-/*   Updated: 2018/06/10 10:23:29 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/06/16 11:18:24 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ int		multi_commands(char **commands)
 	while (commands[++i])
 	{
 		d2_tab = ft_strsplit(commands[i], '|');
+		//var_dump(d2_tab);
 		d3_tab = ft_convert_2dtab_to_3dtab(d2_tab);
+		//var_dump_3d_tab(d3_tab);
 		start_replace(d3_tab);
 		ft_free_2d_array(d2_tab);
 		ret = exe_command(d3_tab);
