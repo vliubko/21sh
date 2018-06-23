@@ -33,7 +33,7 @@ int		check_forbidden_env(char *key)
 		!ft_strequ(key, "OLDPWD") && !ft_strequ(key, "USER") &&
 		!ft_strequ(key, "LOGNAME"))
 		return (0);
-	ft_putstr_fd("Forbidden to unset: HOME, PWD, OLDPWD, USER, LOGNAME\n", 2);
+	ft_putstr_fd("Forbidden to set/unset: HOME, PWD, OLDPWD, USER, LOGNAME\n", 2);
 	return (1);
 }
 
