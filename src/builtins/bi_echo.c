@@ -61,13 +61,13 @@ static void		newline_check(int flag)
 {
 	if (!flag)
 		write(1, "\n", 1);
-	else
-	{
-		ft_putstr(INVERTED);
-		ft_putstr("%");
-		ft_putstr(COLOR_OFF);
-		ft_putstr("\n");
-	}
+//	else
+//	{
+//		ft_putstr(INVERTED);
+//		ft_putstr("%");
+//		ft_putstr(COLOR_OFF);
+//		ft_putstr("\n");
+//	}
 }
 
 void			echo_run(char **av, int i)
