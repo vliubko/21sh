@@ -6,7 +6,7 @@
 #    By: vliubko <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/06 18:46:49 by vliubko           #+#    #+#              #
-#    Updated: 2018/06/10 12:06:55 by vliubko          ###   ########.fr        #
+#    Updated: 2018/07/02 19:49:42 by vliubko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ FILES		:= main \
                builtins/bi_cd\
                builtins/bi_set_unset_env\
                builtins/bi_echo\
-               builtins/bi_clear
+               builtins/bi_clear\
+               quotes/quotes
 
 S_DIR 	= src
 O_DIR 	= obj
@@ -69,6 +70,7 @@ obj:
 	@mkdir obj/execution
 	@mkdir obj/env
 	@mkdir obj/builtins
+	@mkdir obj/quotes
 
 lib:
 	@make -C libft

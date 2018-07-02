@@ -6,7 +6,7 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 12:39:38 by vliubko           #+#    #+#             */
-/*   Updated: 2018/06/16 11:18:24 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/07/02 20:43:55 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	start_exec(void)
 void	shell_loop(void)
 {
 	char	key[8];
+	char 	*old = NULL;
 
 	prompt();
 	signals();
@@ -79,7 +80,24 @@ void	shell_loop(void)
 		read(0, &key, 8);
 		if (key[0] == ENTER)
 		{
-			start_exec();
+            if (!quotes_check())
+			{
+				if (old)
+				old = ft_strjoin_free(old, g_data.cmd_line, 0);
+				else
+					old = ft_strdup(g_data.cmd_line);
+				clear_cmd_line();
+				ft_putstr("\nq> ");
+				g_data.pos = PROMPT_LEN;
+			}
+			else if (old)
+			{
+				ft_strcpy(g_data.cmd_line, old);
+				//ft_strdel(&old);
+				start_exec();
+			}
+			else
+				start_exec();
 			continue ;
 		}
 		move_cursor_choose(key);

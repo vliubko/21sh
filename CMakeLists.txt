@@ -38,7 +38,8 @@ add_executable(21sh
         libft/src/ft_free_2d_array.c
         libft/src/var_dump.c
         libft/src/ft_strsplit.c
+        libft/src/ft_strjoin_free.c
         src/line_editing/history_scroll.c
-        src/line_editing/copy_paste.c)
+        src/line_editing/copy_paste.c src/quotes/quotes.c includes/quotes.h)
 
 target_link_libraries(21sh -lft -ltermcap)

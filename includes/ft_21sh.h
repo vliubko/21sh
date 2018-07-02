@@ -26,6 +26,7 @@
 # include "builtins.h"
 # include "execution.h"
 # include "signals_header.h"
+#include "quotes.h"
 
 # define BOLD_WHINE_FONT "\e[1;37m"
 # define BG_COLOR "\e[48;5;29m"
