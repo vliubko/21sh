@@ -6,7 +6,7 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 19:49:00 by vliubko           #+#    #+#             */
-/*   Updated: 2018/07/07 15:27:38 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/07/07 16:02:28 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int		check_quotes(char **str, char search_for)
 
     while (**str != '\0' && **str != search_for)
     {
-        if (**str == search_for)
+        if (**str == '\"')
         {
-            search_for_next = search_for;
+            search_for_next = '\"';
             (*str)++;
             if (check_quotes(str, search_for_next) == -1)
                 return (-1);
@@ -38,7 +38,7 @@ int		check_quotes(char **str, char search_for)
         (*str)++;
     }
     if (**str == search_for)
-        return (0);
+        return (OK);
     return (-1);
 }
 
@@ -51,8 +51,10 @@ void    wait_quote(void)
 {
     char	key[8];
     char    *tmp;
+    char    *head;
 
     tmp = ft_strdup(g_data.cmd_line);
+    ft_putstr("\nq> ");
     clear_cmd_line();
     g_data.pos = PROMPT_LEN;
     while (42)
@@ -62,23 +64,26 @@ void    wait_quote(void)
         read(0, &key, 8);
         if (key[0] == ENTER)
         {
-            tmp = ft_strjoin_free(tmp, g_data.cmd_line, 0);
+            tmp = ft_strjoin(tmp, g_data.cmd_line);
             clear_cmd_line();
             g_data.pos = PROMPT_LEN;
-            if (check_quotes(&tmp, '\"') == OK)
+            head = tmp;
+            if (check_quotes(&tmp, '\0') == OK)
+            {
+                tmp = head;
                 break ;
+            }
             else
             {
                 ft_putstr("\nq> ");
+                tmp = head;
                 continue ;
             }
-
-
         }
         move_cursor_choose(key);
     }
     clear_cmd_line();
-    ft_strcpy(g_data.cmd_line, tmp);
+    ft_strcat(g_data.cmd_line, tmp);
 }
 
 /*
