@@ -6,13 +6,13 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 19:50:09 by vliubko           #+#    #+#             */
-/*   Updated: 2018/07/02 19:52:09 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/07/07 14:08:35 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef QUOTES_H
 # define QUOTES_H
 
-int    quotes_check(void);
+void    quotes_start(void);
 
 #endif
