@@ -6,7 +6,7 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 19:49:00 by vliubko           #+#    #+#             */
-/*   Updated: 2018/07/07 16:02:28 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/07/14 15:03:56 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void    wait_quote(void)
         read(0, &key, 8);
         if (key[0] == ENTER)
         {
-            tmp = ft_strjoin(tmp, g_data.cmd_line);
+            tmp = ft_strjoin_free(tmp, g_data.cmd_line, 0);
             clear_cmd_line();
             g_data.pos = PROMPT_LEN;
             head = tmp;
@@ -84,6 +84,7 @@ void    wait_quote(void)
     }
     clear_cmd_line();
     ft_strcat(g_data.cmd_line, tmp);
+	ft_strdel(&tmp);
 }
 
 /*
@@ -93,12 +94,17 @@ void    wait_quote(void)
 
  void    quotes_start(void)
 {
-    char    *tmp;
+    char    *cmd;
+    char    *head;
 
-    tmp = ft_strdup(g_data.cmd_line);
+	cmd = ft_strdup(g_data.cmd_line);
+    head = cmd;
     if (ft_strchr(g_data.cmd_line, '"') == NULL)
-        return ;
-    else if (check_quotes(&tmp, '\0') != OK)
+	{
+		ft_strdel(&cmd);
+		return;
+	}
+    else if (check_quotes(&cmd, '\0') != OK)
         wait_quote();
-    //ft_strdel(&tmp);
+    ft_strdel(&head);
 }
