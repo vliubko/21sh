@@ -30,7 +30,7 @@ static void		echo_print(char *str)
 	}
 	else
 		ft_putstr(ret);
-	ft_putstr(COLOR_OFF);
+	//ft_putstr(COLOR_OFF);
 }
 
 static int		echo_dollar_sign(char *str)

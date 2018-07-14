@@ -6,7 +6,7 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 19:49:00 by vliubko           #+#    #+#             */
-/*   Updated: 2018/07/14 15:04:56 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/07/14 17:03:14 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void    wait_quote(void)
     char    *tmp;
     char    *head;
 
-    tmp = ft_strdup(g_data.cmd_line);
+    tmp = ft_strjoin(g_data.cmd_line, "\n");
     ft_putstr("\nq> ");
     clear_cmd_line();
     g_data.pos = PROMPT_LEN;
@@ -89,6 +89,33 @@ void    wait_quote(void)
 }
 
 /*
+** Removing quotes from final cmd_line.
+** Sadly, didn't make normal usage of strings in shell.
+** Just delete all closed quotes chars.
+*/
+
+void remove_final_quotes(void)
+{
+	char	quote;
+	int		writer;
+	int 	reader;
+
+	quote = 34;
+	reader = 0;
+	writer = 0;
+
+	while (g_data.cmd_line[reader])
+	{
+		if (g_data.cmd_line[reader] != quote)
+		{
+			g_data.cmd_line[writer++] = g_data.cmd_line[reader];
+		}
+		reader++;
+	}
+	ft_bzero(&g_data.cmd_line[writer], 4096);
+}
+
+/*
 ** If no quotes found, return immediately.
 ** Else, go to quote loop, waiting for quote closure.
 */
@@ -108,4 +135,5 @@ void    wait_quote(void)
     else if (check_quotes(&cmd, '\0') != OK)
         wait_quote();
     ft_strdel(&head);
+	remove_final_quotes();
 }
