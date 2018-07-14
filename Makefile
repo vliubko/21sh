@@ -36,6 +36,7 @@ FILES		:= main \
                execution/check_bi\
                execution/pipes\
                execution/execute\
+               execution/redirection\
                execution/dollar_replace\
                env/env_commands\
                env/env_init\
