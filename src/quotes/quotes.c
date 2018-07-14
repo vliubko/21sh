@@ -6,7 +6,7 @@
 /*   By: vliubko <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/02 19:49:00 by vliubko           #+#    #+#             */
-/*   Updated: 2018/07/14 15:03:56 by vliubko          ###   ########.fr       */
+/*   Updated: 2018/07/14 15:04:56 by vliubko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void    wait_quote(void)
         if (key[0] == ENTER)
         {
             tmp = ft_strjoin_free(tmp, g_data.cmd_line, 0);
+			tmp = ft_strjoin_free(tmp, "\n", 0);
             clear_cmd_line();
             g_data.pos = PROMPT_LEN;
             head = tmp;
