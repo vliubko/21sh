@@ -12,17 +12,32 @@
 
 #include "ft_21sh.h"
 
-int 	ft_has_redirect(char *cmd_line)
+
+/*
+** Check if any redirection symbol in cmd_line
+** Works only with first element of pipeline - d3_tab[0][i]
+**
+*/
+
+int 	ft_has_redirect(char ***d3_tab)
 {
 	int 	i;
+	int 	j;
+	char 	*line;
 	char 	c;
 
 	i = 0;
-	while (cmd_line[i])
+	while (d3_tab[0][i])
 	{
-		c = cmd_line[i];
-		if (c == '>' || c == '<')
-			return (1);
+		line = d3_tab[0][i];
+		j = 0;
+		while (line[j])
+		{
+			c = line[j];
+			if (c == '>' || c == '<')
+				return (1);
+			j++;
+		}
 		i++;
 	}
 	return (0);
@@ -35,6 +50,7 @@ char  	*ft_redirect_arrow_type(int *arrow, char **cmd)
 
 	i = -1;
 	*arrow = 1;
+	//var_dump(cmd);
 	while (cmd[++i] && !(ft_strequ(cmd[i], ">")))
 	{
 		if (ft_strequ(cmd[i], ">>"))
@@ -44,29 +60,39 @@ char  	*ft_redirect_arrow_type(int *arrow, char **cmd)
 		}
 	}
 	i++;
+	if (!cmd[i])
+		return NULL;
 	file_name = ft_strdup(cmd[i]);
 	return (file_name);
 }
 
-void	ft_redirection(char **cmd)
+int		ft_redirection(char ***d3_tab)
 {
 	static int		fd;
 	int		arrow;
 	char 	*file_name;
 
-	file_name = ft_redirect_arrow_type(&arrow, cmd);
+	file_name = ft_redirect_arrow_type(&arrow, d3_tab[0]);
+	if (file_name == NULL)
+	{
+		ft_putendl("Parse error");
+		return (1);
+	}
 	if (arrow == 1)
 	{
 		fd = open(file_name, O_CREAT | O_RDWR | O_APPEND,
 				  S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
-		dup2(fd, 1);
+
 	}
 	else if (arrow == 2)
 	{
 		fd = open(file_name, O_CREAT | O_RDWR | O_TRUNC,
 				  S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
-		dup2(fd, 1);
 	}
-	close(fd);
+	close(1);
+	dup(fd);
+	//ft_putstr("File name: ");
+	//ft_putendl(file_name);
 	ft_strdel(&file_name);
+	return (fd);
 }

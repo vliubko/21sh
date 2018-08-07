@@ -18,7 +18,7 @@ int		pipe_fork_run(char ***cmd);
 int		execve_cmd(char ***cmd);
 int		fork_run_cmd(char *path, char ***d3_tab);
 void	start_replace(char ***commands);
-int 	ft_has_redirect(char *cmd_line);
-void	ft_redirection(char **cmd);
+int 	ft_has_redirect(char ***d3_tab);
+int		ft_redirection(char ***d3_tab);
 
 #endif

@@ -24,28 +24,49 @@ void	ft_free_3d_array(char ***av)
 	free(av);
 }
 
+char 	***debug_3d(void)
+{
+	char ***ret;
+	int 	len = 1;
+	//int 	i = 0;
+
+	ret = (char***)malloc(sizeof(ret) * (len + 1));
+	ret[len] = NULL;
+
+	ret[0] = ft_strsplit_whitespaces("ls > test");
+	return (ret);
+}
+
 int		multi_commands(char **commands)
 {
 	int		i;
 	char	**d2_tab;
 	char	***d3_tab;
 	int		ret;
+	static int 	redirect_fd;
 
 	i = -1;
 	while (commands[++i])
 	{
-		if (ft_has_redirect(commands[i]))
-		{
-			ft_redirection(&commands[i]);
-		}
 		d2_tab = ft_strsplit(commands[i], '|');
 		//var_dump(d2_tab);
-		d3_tab = ft_convert_2dtab_to_3dtab(d2_tab);
+		//d3_tab = ft_convert_2dtab_to_3dtab(d2_tab);
+
+		d3_tab = debug_3d();
 		//var_dump_3d_tab(d3_tab);
 		start_replace(d3_tab);
+		if (ft_has_redirect(d3_tab))
+		{
+			redirect_fd = ft_redirection(d3_tab);
+		}
 		ft_free_2d_array(d2_tab);
 		ret = exe_command(d3_tab);
 		ft_free_3d_array(d3_tab);
+		if (redirect_fd)
+		{
+			redirect_fd = 0;
+			dup2(1, redirect_fd);
+		}
 		if (ret == -1)
 			return (-1);
 	}
