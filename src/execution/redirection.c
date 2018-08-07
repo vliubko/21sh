@@ -33,25 +33,24 @@ char  	*ft_redirect_arrow_type(int *arrow, char **cmd)
 	int		i;
 	char	*file_name;
 
-	i = 0;
+	i = -1;
 	*arrow = 1;
-	while (cmd[i])
+	while (cmd[++i] && !(ft_strequ(cmd[i], ">")))
 	{
 		if (ft_strequ(cmd[i], ">>"))
 		{
 			*arrow = 2;
-			i++;
 			break ;
 		}
-		i++;
 	}
-
-	return ();
+	i++;
+	file_name = ft_strdup(cmd[i]);
+	return (file_name);
 }
 
 void	ft_redirection(char **cmd)
 {
-	int		fd;
+	static int		fd;
 	int		arrow;
 	char 	*file_name;
 
@@ -69,4 +68,5 @@ void	ft_redirection(char **cmd)
 		dup2(fd, 1);
 	}
 	close(fd);
+	ft_strdel(&file_name);
 }
