@@ -94,7 +94,7 @@ void	shell_loop(void)
 int		main(int ac, char **av, char **env)
 {
 	env_init(ac, av, env);
-	shell_init();
+	shell_init(av);
 	shell_loop();
 	return (0);
 }

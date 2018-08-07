@@ -81,7 +81,7 @@ typedef struct		s_shell
 t_shell				g_data;
 
 void				sig_callback(int signo);
-void				shell_init(void);
+void				shell_init(char **av);
 void				shell_loop(void);
 void				exit_signal(void);
 void				get_winsize(void);
